@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import { v4 as uuidv4 } from 'uuid';
 import 'dotenv/config';
-import models from './models';
+import models, { connectDb } from './models';
 import routes from './routes';
 
 const app = express();
@@ -23,6 +22,50 @@ app.use('/session', routes.session);
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
 
-app.listen(3000, () =>
-    console.log(`Example app listening on port ${process.env.PORT}!`),
-);
+const eraseDatabaseOnSync = true;
+
+connectDb().then(async () => {
+    if (eraseDatabaseOnSync) {
+        await Promise.all([
+            models.User.deleteMany({}),
+            models.Message.deleteMany({}),
+        ]);
+        createUsersWithMessages();
+    }
+
+    app.listen(process.env.PORT, () =>
+        console.log(`Example app listening on port ${process.env.PORT}!`),
+    );
+});
+
+const createUsersWithMessages = async () => {
+    const user1 = new models.User({
+        username: 'rayner.lim',
+    });
+
+    const user2 = new models.User({
+        username: 'mil.renyar',
+    });
+
+    const message1 = new models.Message({
+        text: 'Learnt Express.js',
+        user: user1.id,
+    });
+
+    const message2 = new models.Message({
+        text: 'Experimented with Mongoose',
+        user: user2.id,
+    });
+
+    const message3 = new models.Message({
+        text: 'React or Vue for the frontend?',
+        user: user2.id,
+    });
+
+    await message1.save();
+    await message2.save();
+    await message3.save();
+
+    await user1.save();
+    await user2.save();
+};
