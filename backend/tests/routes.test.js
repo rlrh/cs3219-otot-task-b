@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../src';
-import models, { connectDb } from '../src/models';
+import app from '../src/app';
+import models, { connectDb, disconnectDb } from '../src/models';
 
 const user1 = new models.User({
     username: 'rayner.lim',
@@ -35,12 +35,20 @@ const createUsersWithMessages = async () => {
 };
 
 beforeAll(async () => {
-    await connectDb();
+    await connectDb(process.env.TEST_DATABASE_URL);
     await Promise.all([
         models.User.deleteMany({}),
         models.Message.deleteMany({}),
     ]);
     await createUsersWithMessages();
+});
+
+afterAll(async () => {
+    await Promise.all([
+        models.User.deleteMany({}),
+        models.Message.deleteMany({}),
+    ]);
+    disconnectDb();
 });
 
 describe('Session Endpoints', () => {

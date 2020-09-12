@@ -43,49 +43,50 @@ app.use((error, req, res, next) => {
         .json({ error: error.toString() });
 });
 
-const eraseDatabaseOnSync = false;
+if (process.env.NODE_ENV !== 'test') {
 
-connectDb().then(async () => {
-    if (eraseDatabaseOnSync) {
-        await Promise.all([
-            models.User.deleteMany({}),
-            models.Message.deleteMany({}),
-        ]);
-
-        createUsersWithMessages();
-    }
-});
-
-const createUsersWithMessages = async () => {
-    const user1 = new models.User({
-        username: 'rayner.lim',
+    const eraseDatabaseOnSync = true;
+    connectDb(process.env.PROD_DATABASE_URL).then(async () => {
+        if (eraseDatabaseOnSync) {
+            await Promise.all([
+                models.User.deleteMany({}),
+                models.Message.deleteMany({}),
+            ]);
+            createUsersWithMessages();
+        }
     });
 
-    const user2 = new models.User({
-        username: 'mil.renyar',
-    });
+    const createUsersWithMessages = async () => {
+        const user1 = new models.User({
+            username: 'rayner.lim',
+        });
 
-    const message1 = new models.Message({
-        text: 'Learnt Express.js',
-        user: user1.id,
-    });
+        const user2 = new models.User({
+            username: 'mil.renyar',
+        });
 
-    const message2 = new models.Message({
-        text: 'Experimented with Mongoose',
-        user: user2.id,
-    });
+        const message1 = new models.Message({
+            text: 'Learnt Express.js',
+            user: user1.id,
+        });
 
-    const message3 = new models.Message({
-        text: 'React or Vue for the frontend?',
-        user: user2.id,
-    });
+        const message2 = new models.Message({
+            text: 'Experimented with Mongoose',
+            user: user2.id,
+        });
 
-    await message1.save();
-    await message2.save();
-    await message3.save();
+        const message3 = new models.Message({
+            text: 'React or Vue for the frontend?',
+            user: user2.id,
+        });
 
-    await user1.save();
-    await user2.save();
+        await message1.save();
+        await message2.save();
+        await message3.save();
+
+        await user1.save();
+        await user2.save();
+    };
 };
 
 export default app;
