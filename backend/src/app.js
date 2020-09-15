@@ -46,6 +46,7 @@ app.use((error, req, res, next) => {
 if (process.env.NODE_ENV !== 'test') {
 
     const eraseDatabaseOnSync = true;
+
     connectDb(process.env.PROD_DATABASE_URL).then(async () => {
         if (eraseDatabaseOnSync) {
             await Promise.all([
@@ -72,7 +73,7 @@ if (process.env.NODE_ENV !== 'test') {
 
         const message2 = new models.Message({
             text: 'Experimented with Mongoose',
-            user: user2.id,
+            user: user1.id,
         });
 
         const message3 = new models.Message({
