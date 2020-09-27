@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(message, index) in messages" :key="message._id" class="mb-3">
+    <div v-for="(message, index) in messages" :key="message._id" class="pb-3">
       <Message :text="message.text" :username="usernames[index]" :onDelete="makeDelete(message)" :onEdit="makeEdit(message)"/>
     </div>
   </div>
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     usernames() {
-      if (this.users) {
+      if (this.messages.length && this.users.length) {
         return this.messages
         .map(message => message.user)
         .map(userId => this.users.find(user => user._id === userId))

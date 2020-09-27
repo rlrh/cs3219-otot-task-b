@@ -1,10 +1,12 @@
 <template>
   <b-card :title="newText" :sub-title="username">
-    <b-button v-if="onEdit && !editing" @click="toggleEditing" variant="link">Edit</b-button>
-    <b-form-input v-if="editing" v-model="newText" placeholder="Enter new text"></b-form-input>
-    <b-button v-if="editing" @click="doneEditing" variant="link">Done</b-button>
-    <b-button v-if="editing" @click="cancelEditing" variant="link">Cancel</b-button>
-    <b-button v-if="onDelete && !editing" @click="onDelete" variant="link">Delete</b-button>
+    <b-button v-if="onEdit && !editing" @click="toggleEditing" variant="link" class="text-info">Edit</b-button>
+    <div v-if="editing" class="input-group">
+      <b-form-input v-model="newText" @keyup.enter="doneEditing" placeholder="Enter new text"></b-form-input>
+      <b-button @click="doneEditing" variant="link" class="text-success">Done</b-button>
+      <b-button @click="cancelEditing" variant="link" class="text-danger">Cancel</b-button>
+    </div>
+    <b-button v-if="onDelete && !editing" @click="onDelete" variant="link" class="text-danger">Delete</b-button>
   </b-card>
 </template>
 

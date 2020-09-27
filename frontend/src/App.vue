@@ -1,90 +1,111 @@
 <template>
-  <div id="app" class="container">
-    <div class="row mt-5 d-flex">
-      <h1 class="flex-grow-1">Message Board</h1>
-      <b-button disabled>{{ session.username }}</b-button>
-    </div>
-    <div class="row mt-5">
-      <b-form-input v-model="text" placeholder="Enter a message" @keyup.enter="handleCreateMessage"></b-form-input>
-    </div>
-    <div class="row mt-5">
-      <MessageList :messages="messages" :users="users" :session="session" :deleteFn="deleteMessage" :editFn="editMessage" />
+  <div id="app" class="bg-info">
+    <div class="container">
+      <div class="row pt-5 d-flex">
+        <h1 class="flex-grow-1 display-4 text-white">Message Board</h1>
+        <b-button variant="outline-light" disabled>{{
+          session ? session.username : "Loading..."
+        }}</b-button>
+      </div>
+      <div class="row pt-5 input-group">
+        <b-form-input
+          v-model="text"
+          @keyup.enter="handleCreateMessage"
+          placeholder="Enter a message"
+          size="lg"
+        ></b-form-input>
+        <div class="input-group-append">
+          <b-button @click="handleCreateMessage" variant="light"
+            >Post</b-button
+          >
+        </div>
+      </div>
+      <div class="row pt-5" v-if="messages.length">
+        <MessageList
+          :messages="messages"
+          :users="users"
+          :session="session"
+          :deleteFn="deleteMessage"
+          :editFn="editMessage"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import MessageList from './components/MessageList.vue'
+import MessageList from "./components/MessageList.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    MessageList
+    MessageList,
   },
-  data () {
+  data() {
     return {
-      messages: null,
-      users: null,
-      session: null,
-      text: null
-    }
+      messages: [],
+      users: [],
+      session: {},
+      text: "",
+    };
   },
   mounted() {
-    fetch('https://cs3219-a0180340u-otot-task-b.herokuapp.com/messages')
-    .then(response => response.json())
-    .then(data => this.messages = data);
-    fetch('https://cs3219-a0180340u-otot-task-b.herokuapp.com/users')
-    .then(response => response.json())
-    .then(data => this.users = data);
-    fetch('https://cs3219-a0180340u-otot-task-b.herokuapp.com/session')
-    .then(response => response.json())
-    .then(data => this.session = data);
+    fetch("/messages")
+      .then((response) => response.json())
+      .then((data) => (this.messages = data));
+    fetch("/users")
+      .then((response) => response.json())
+      .then((data) => (this.users = data));
+    fetch("/session")
+      .then((response) => response.json())
+      .then((data) => (this.session = data));
   },
   methods: {
     createMessage(text) {
-      fetch(`https://cs3219-a0180340u-otot-task-b.herokuapp.com/messages`, {
-        method: 'POST',
+      fetch(`/messages`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: text })
+        body: JSON.stringify({ text: text }),
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        this.messages = [ data, ...this.messages]
-      })
-      .catch(error => console.log(error))
+        .then((response) => response.json())
+        .then((data) => {
+          this.messages = [data, ...this.messages];
+        })
+        .catch((error) => console.log(error));
     },
     deleteMessage(message) {
-      fetch(`https://cs3219-a0180340u-otot-task-b.herokuapp.com/messages/${message._id}`, {
-        method: 'DELETE',
+      fetch(`/messages/${message._id}`, {
+        method: "DELETE",
       })
-      .then(() => this.messages = this.messages.filter(item => item._id !== message._id))
-      .catch(error => console.log(error))
+        .then(
+          () =>
+            (this.messages = this.messages.filter(
+              (item) => item._id !== message._id
+            ))
+        )
+        .catch((error) => console.log(error));
     },
     editMessage(message, text) {
-      fetch(`https://cs3219-a0180340u-otot-task-b.herokuapp.com/messages/${message._id}`, {
-        method: 'PUT',
+      fetch(`/messages/${message._id}`, {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: text })
+        body: JSON.stringify({ text: text }),
       })
-      .then(() => this.messages = this.messages.map(item => item._id === message._id ? { ...item, text: text } : item))
-      .catch(error => console.log(error))
+        .then(
+          () =>
+            (this.messages = this.messages.map((item) =>
+              item._id === message._id ? { ...item, text: text } : item
+            ))
+        )
+        .catch((error) => console.log(error));
     },
     handleCreateMessage() {
       this.createMessage(this.text);
-    }
-  }
-}
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-</style>
