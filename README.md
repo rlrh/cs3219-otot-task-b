@@ -17,7 +17,7 @@ npm install
 cd ..
 ```
 3. Run:
-- Both frontend and backend with hot reload: `npm run dev`
+- Both frontend and backend: `npm run dev`
 - Backend only: `npm run backend`
 - Frontend only: `npm run frontend`
 
