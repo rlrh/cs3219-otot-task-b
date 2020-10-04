@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.com/rlrh/cs3219-otot-task-b.svg?branch=master)](https://travis-ci.com/rlrh/cs3219-otot-task-b)
 
-Live demo: `https://cs3219-a0180340u-otot-task-b.herokuapp.com/`
+Live demo: [`https://cs3219-a0180340u-otot-task-b.herokuapp.com/`](https://cs3219-a0180340u-otot-task-b.herokuapp.com/)
 
 API routes:
 - `/messages` (GET, POST)
@@ -11,6 +11,7 @@ API routes:
 - `/users` (GET)
 - `/users/:userId` (GET)
 - `/session` (GET)
+
 
 1. Setup MongoDB databases for testing and production and copy their URLs into the `.env` file
 ```
