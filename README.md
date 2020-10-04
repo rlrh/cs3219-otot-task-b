@@ -1,21 +1,27 @@
 # CS3219 OTOT Task B
-## A0180340U Rayner Lim Ri Han
+### A0180340U Rayner Lim Ri Han
 
 [![Build Status](https://travis-ci.com/rlrh/cs3219-otot-task-b.svg?branch=master)](https://travis-ci.com/rlrh/cs3219-otot-task-b)
 
-### Basic message board web app built with Express.js for the backend, Vue.js for the frontend, and BootstrapVue for styling
+##### Basic message board web app built with Express.js for the backend, Vue.js for the frontend, and BootstrapVue for styling
 
-#### Live demo: [`https://cs3219-a0180340u-otot-task-b.herokuapp.com/`](https://cs3219-a0180340u-otot-task-b.herokuapp.com/)
+#### GitHub repo: [`https://github.com/rlrh/cs3219-otot-task-b`](https://github.com/rlrh/cs3219-otot-task-b)
+This is a monorepo that has both the backend and frontend.
+The project has been preconfigured for Travis CI, and both Serverless and Heroku deployment.
+Serverless deployment only deploys the backend API without the frontend.
+Heroku deployment combines the backend and frontend into a single app.
 
-#### Live API server deployed on AWS Lambda with Serverless framework: 
-[`https://yrtw21jxmg.execute-api.us-east-1.amazonaws.com/master`](https://yrtw21jxmg.execute-api.us-east-1.amazonaws.com/master)
-##### API routes:
-- `/messages` (GET, POST)
-- `/messages/:messageId` (GET, PUT, DELETE)
-- `/users` (GET)
-- `/users/:userId` (GET)
-- `/session` (GET)
+#### Live demo deployed on Heroku: [`https://cs3219-a0180340u-otot-task-b.herokuapp.com/`](https://cs3219-a0180340u-otot-task-b.herokuapp.com/) 
+Note: the Heroku app does not use the AWS Lambda API gateway
 
+#### Live API deployed on AWS Lambda: [`https://yrtw21jxmg.execute-api.us-east-1.amazonaws.com/master`](https://yrtw21jxmg.execute-api.us-east-1.amazonaws.com/master)
+
+#### API routes:
+- `/messages` GET, POST (body JSON:`{ text: <your_message_text }`)
+- `/messages/:messageId` GET, DELETE, PUT (body JSON: `{ text: <your_message_text }`)
+- `/users` GET
+- `/users/:userId` GET
+- `/session` GET
 
 #### 1. Configure:
 Setup MongoDB databases for testing and production and copy their URLs into the `.env` file:
@@ -54,9 +60,7 @@ npm run start
 Live app is at `http://localhost:5000`
 
 #### 6. Deploy:
-This project has been preconfigured for Travis CI, Serverless and Heroku.
-
-##### For serverless deployment:
+##### For serverless deployment (API only):
 1. Fork this repo.
 2. Setup MongoDB production and test databases according to part 1 above (if you have not).
 3. Create [Travis CI](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github) and [AWS](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) accounts.
@@ -88,9 +92,10 @@ endpoints:
     }
 ...
 ```
-9. Run the frontend locally: `npm run frontend` and go to `http://localhost:8080`
+9. Run the frontend locally: `npm run frontend` and go to: `http://localhost:8080`
 
-##### For Heroku deployment:
-- Create an app on Heroku Dashboard and connect it to your GitHub repo by following instructions [here](https://devcenter.heroku.com/articles/github-integration)
-- Setup Travis CI with included `.travis.yml` file by following instructions [here](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github)
-- Setup CI/CD workflow by enabling `Automatic Deploys from GitHub` and `Wait for CI to pass before deploy`
+##### For Heroku deployment (both backend and frontend):
+1. Create an app on Heroku Dashboard and connect it to your GitHub repo by following instructions [here](https://devcenter.heroku.com/articles/github-integration)
+2. Setup Travis CI with included `.travis.yml` file by following instructions [here](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github)
+3. Setup CI/CD workflow by enabling `Automatic Deploys from GitHub` and `Wait for CI to pass before deploy` on your app in Heroku Dashboard
+4. Heroku will deploy the app automatically after Travis CI passes tests
