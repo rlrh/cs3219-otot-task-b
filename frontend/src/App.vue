@@ -50,19 +50,19 @@ export default {
     };
   },
   mounted() {
-    fetch(`${process.env.VUE_APP_BACKEND_URL}/messages`)
+    fetch(`/messages`)
       .then((response) => response.json())
       .then((data) => (this.messages = data));
-    fetch(`${process.env.VUE_APP_BACKEND_URL}/users`)
+    fetch(`/users`)
       .then((response) => response.json())
       .then((data) => (this.users = data));
-    fetch(`${process.env.VUE_APP_BACKEND_URL}/session`)
+    fetch(`/session`)
       .then((response) => response.json())
       .then((data) => (this.session = data));
   },
   methods: {
     createMessage(text) {
-      fetch(`${process.env.VUE_APP_BACKEND_URL}/messages`, {
+      fetch(`/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export default {
         .catch((error) => console.log(error));
     },
     deleteMessage(message) {
-      fetch(`${process.env.VUE_APP_BACKEND_URL}/messages/${message._id}`, {
+      fetch(`/messages/${message._id}`, {
         method: "DELETE",
       })
         .then(
@@ -88,7 +88,7 @@ export default {
         .catch((error) => console.log(error));
     },
     editMessage(message, text) {
-      fetch(`${process.env.VUE_APP_BACKEND_URL}/messages/${message._id}`, {
+      fetch(`/messages/${message._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
