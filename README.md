@@ -54,7 +54,9 @@ npm run start
 Live app is at `http://localhost:5000`
 
 #### 6. Deploy:
-For serverless deployment:
+This project has been preconfigured for Travis CI, Serverless and Heroku.
+
+##### For serverless deployment:
 1. Fork this repo.
 2. Setup MongoDB production and test databases according to part 1 above (if you have not).
 3. Create [Travis CI](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github) and [AWS](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) accounts.
@@ -88,7 +90,7 @@ endpoints:
 ```
 9. Run the frontend locally: `npm run frontend` and go to `http://localhost:8080`
 
-For Heroku deployment:
+##### For Heroku deployment:
 - Create an app on Heroku Dashboard and connect it to your GitHub repo by following instructions [here](https://devcenter.heroku.com/articles/github-integration)
 - Setup Travis CI with included `.travis.yml` file by following instructions [here](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github)
 - Setup CI/CD workflow by enabling `Automatic Deploys from GitHub` and `Wait for CI to pass before deploy`
