@@ -9,6 +9,7 @@ deploy_service_job: &DEPLOY_SERVICE_JOB
     - npm install -g serverless
     - travis_retry npm install
   script:
+    - npm test
     - serverless deploy -s ${TRAVIS_BRANCH}
 jobs:
   include:
