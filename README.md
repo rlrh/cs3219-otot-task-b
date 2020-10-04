@@ -3,6 +3,15 @@
 
 [![Build Status](https://travis-ci.com/rlrh/cs3219-otot-task-b.svg?branch=master)](https://travis-ci.com/rlrh/cs3219-otot-task-b)
 
+Live demo: `https://cs3219-a0180340u-otot-task-b.herokuapp.com/`
+
+API routes:
+- `/messages` (GET, POST)
+- `/messages/:messageId` (GET, PUT, DELETE)
+- `/users` (GET)
+- `/users/:userId` (GET)
+- `/session` (GET)
+
 1. Setup MongoDB databases for testing and production and copy their URLs into the `.env` file
 ```
 PROD_DATABASE_URL=?
@@ -18,8 +27,9 @@ cd ..
 ```
 3. Run:
 - Both frontend and backend: `npm run dev`
-- Backend only: `npm run backend`
-- Frontend only: `npm run frontend`
+- Backend only: `npm run backend`  
+- Frontend only: `npm run frontend` 
+- Backend is at `http://localhost:5000`, frontend is at `http://localhost:8080` by default
 
 4. Test:
 `npm run test`
