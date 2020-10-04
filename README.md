@@ -17,15 +17,15 @@ npm install
 cd ..
 ```
 3. Run:
-Both frontend and backend with hot reload: `npm run dev`
-Backend only: `npm run backend`
-Frontend only: `npm run frontend`
+- Both frontend and backend with hot reload: `npm run dev`
+- Backend only: `npm run backend`
+- Frontend only: `npm run frontend`
 
 4. Test:
 `npm run test`
 
 5. Build:
-Both frontend and backend with hot reload: `npm run heroku-postbuild`
-Run built: `npm run start`
-Backend only: `npm run build`
-Frontend only: `cd frontend && npm run build`
+- Both frontend and backend with hot reload: `npm run heroku-postbuild`
+- Run built: `npm run start`
+- Backend only: `npm run build`
+- Frontend only: `cd frontend && npm run build`
