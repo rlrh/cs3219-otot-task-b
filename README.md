@@ -36,10 +36,15 @@ cd ..
 - Backend is at `http://localhost:5000`, frontend is at `http://localhost:8080` by default
 
 #### 4. Test:
-`npm run test`
+- Run tests locally: `npm run test`
+- Setup Travis CI with included `.travis.yml` file by following instructions [here](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github)
 
 #### 5. Build:
 - Both frontend and backend: `npm run heroku-postbuild`
 - Run built: `npm run start`
 - Backend only: `npm run build`
 - Frontend only: `cd frontend && npm run build`
+
+#### 6. Deploy:
+- Create an app on Heroku Dashboard and connect it to your GitHub repo by following instructions [here](https://devcenter.heroku.com/articles/github-integration)
+- Setup CI/CD workflow by enabling `Automatic Deploys from GitHub` and `Wait for CI to pass before deploy`, i
