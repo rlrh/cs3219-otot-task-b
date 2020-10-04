@@ -50,13 +50,13 @@ export default {
     };
   },
   mounted() {
-    fetch("/messages")
+    fetch(`/messages`)
       .then((response) => response.json())
       .then((data) => (this.messages = data));
-    fetch("/users")
+    fetch(`/users`)
       .then((response) => response.json())
       .then((data) => (this.users = data));
-    fetch("/session")
+    fetch(`/session`)
       .then((response) => response.json())
       .then((data) => (this.session = data));
   },
