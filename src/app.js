@@ -21,7 +21,6 @@ app.use(async (req, res, next) => {
 app.use('/session', routes.session);
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
-/*
 app.get('*', function (req, res, next) {
     const error = new Error(
         `${req.ip} tried to access ${req.originalUrl}`,
@@ -31,7 +30,6 @@ app.get('*', function (req, res, next) {
 
     next(error);
 });
-*/
 
 app.use((error, req, res, next) => {
     if (!error.statusCode) error.statusCode = 500;
@@ -44,13 +42,6 @@ app.use((error, req, res, next) => {
         .status(error.statusCode)
         .json({ error: error.toString() });
 });
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(__dirname + '/public'));
-    app.get(/.*/, (req, res) => {
-      res.sendFile(__dirname + '/public/index.html');
-    })
-}
 
 if (process.env.NODE_ENV !== 'test') {
 
