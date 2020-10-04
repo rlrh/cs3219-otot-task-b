@@ -39,7 +39,7 @@ cd ..
 `npm run test`
 
 #### 5. Build:
-- Both frontend and backend with hot reload: `npm run heroku-postbuild`
+- Both frontend and backend: `npm run heroku-postbuild`
 - Run built: `npm run start`
 - Backend only: `npm run build`
 - Frontend only: `cd frontend && npm run build`
