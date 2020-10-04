@@ -1,9 +1,8 @@
 # CS3219 OTOT Task B
 ### A0180340U Rayner Lim Ri Han
 
-[![Build Status](https://travis-ci.com/rlrh/cs3219-otot-task-b.svg?branch=master)](https://travis-ci.com/rlrh/cs3219-otot-task-b)
-
 ##### Basic message board web app built with Express.js for the backend, Vue.js for the frontend, and BootstrapVue for styling
+[![Build Status](https://travis-ci.com/rlrh/cs3219-otot-task-b.svg?branch=master)](https://travis-ci.com/rlrh/cs3219-otot-task-b)
 
 #### GitHub repo: [`https://github.com/rlrh/cs3219-otot-task-b`](https://github.com/rlrh/cs3219-otot-task-b)
 This is a monorepo that has both the backend and frontend.
@@ -17,8 +16,8 @@ Note: the Heroku app does not use the AWS Lambda API gateway
 #### Live API deployed on AWS Lambda: [`https://yrtw21jxmg.execute-api.us-east-1.amazonaws.com/master`](https://yrtw21jxmg.execute-api.us-east-1.amazonaws.com/master)
 
 #### API routes:
-- `/messages` GET, POST (body JSON:`{ text: <your_message_text }`)
-- `/messages/:messageId` GET, DELETE, PUT (body JSON: `{ text: <your_message_text }`)
+- `/messages` GET, POST (body JSON:`{ text: <your_message_text> }`)
+- `/messages/:messageId` GET, DELETE, PUT (body JSON: `{ text: <your_message_text> }`)
 - `/users` GET
 - `/users/:userId` GET
 - `/session` GET
@@ -95,7 +94,9 @@ endpoints:
 9. Run the frontend locally: `npm run frontend` and go to: `http://localhost:8080`
 
 ##### For Heroku deployment (both backend and frontend):
-1. Create an app on Heroku Dashboard and connect it to your GitHub repo by following instructions [here](https://devcenter.heroku.com/articles/github-integration)
-2. Setup Travis CI with included `.travis.yml` file by following instructions [here](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github)
-3. Setup CI/CD workflow by enabling `Automatic Deploys from GitHub` and `Wait for CI to pass before deploy` on your app in Heroku Dashboard
-4. Heroku will deploy the app automatically after Travis CI passes tests
+1. Fork this repo
+2. Setup MongoDB production and test databases according to part 1 above (if you have not)
+3. Create an app on Heroku Dashboard and connect it to your GitHub repo by following instructions [here](https://devcenter.heroku.com/articles/github-integration)
+4. Setup Travis CI with included `.travis.yml` file by following instructions [here](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github)
+5. Setup CI/CD workflow by enabling `Automatic Deploys from GitHub` and `Wait for CI to pass before deploy` on your app in Heroku Dashboard
+6. Heroku will deploy the app automatically after Travis CI passes tests
