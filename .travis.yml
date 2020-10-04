@@ -1,3 +1,16 @@
 language: node_js
 node_js:
   - lts/*
+deploy_service_job: &DEPLOY_SERVICE_JOB
+  cache:
+    directories:
+      - node_modules
+  install:
+    - npm install -g serverless
+    - travis_retry npm install
+  script:
+    - serverless deploy -s ${TRAVIS_BRANCH}
+jobs:
+  include:
+    - <<: *DEPLOY_SERVICE_JOB
+      name: "Deploy API"

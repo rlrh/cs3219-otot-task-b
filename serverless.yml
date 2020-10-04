@@ -1,4 +1,4 @@
-service: sample-app
+service: cs3219-a0180340u-otot-task-b
 provider:
   name: aws
   runtime: nodejs12.x
@@ -14,7 +14,6 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js 
     includeModules: true
-
 functions:
   app:
     handler: src/handler.default
@@ -29,3 +28,4 @@ functions:
           cors: true
 plugins:
   - serverless-webpack
+  - serverless-dotenv-plugin
